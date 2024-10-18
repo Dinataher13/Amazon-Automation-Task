@@ -25,31 +25,35 @@ public class CheckoutPage {
     }
 
     // Locators
-    By paymentMethod = By.xpath("(//div[@class='a-column a-span10'])[1]");
-    By cashOnDeliveryCheck = By.id("//input[@id='pp-rlt6nn-80");
-    By cashOnDeliveryConfirmButton = By.id("pp-84nQwi-81-announce");
-    By deliveryFeeValue = By.xpath("//tr[contains(.,'الشحن والتسليم')]//td[2]");
+
+    By cashOnDeliveryCheck = By.xpath("//span[@class='a-color-base a-text-bold'][text()='الدفع عند الاستلام ']");
+    By cashOnDeliveryConfirmButton = By.xpath("//input[@name='ppw-widgetEvent:SetPaymentPlanSelectContinueEvent'][@class='a-button-input a-button-text']");
+    By deliveryFeeValue = By.xpath("//tr[contains(.,'رسوم الدفع عند الإستلام')]//td[2]");
     By totalOrder= By.xpath("//tr[contains(.,'إجمالي الطلب')]//td[2]");
 
 
 
     // Functions
 
-    public CheckoutPage openPaymentMethods (){
-        driver.findElement(paymentMethod).click();
-        return this;
-    }
 
     public CheckoutPage chooseCashOnDelivery (){
-        driver.findElement(cashOnDeliveryCheck).click();
+        wait.until(d -> {
+        WebElement cashOnDeliveryElement = driver.findElement(cashOnDeliveryCheck);
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", cashOnDeliveryElement);
         driver.findElement(cashOnDeliveryConfirmButton).click();
+            return true;
+        });
         return this;
     }
 
     public CheckoutPage getDeliveryFee (){
+        wait.until(d -> {
        String deliveryFeeElement= driver.findElement(deliveryFeeValue).getText().replaceAll("[^0-9.]", "");
        String finalDeliveryFee = deliveryFeeElement.replace(".00","");
          orderDeliveryFee = Double.parseDouble(finalDeliveryFee);
+            return true;
+        });
         return this;
     }
 
@@ -65,6 +69,7 @@ public class CheckoutPage {
 public void assertTotalOrderPrice (){
         double delFeeAndcartTotalPriceSum = orderDeliveryFee + CartPage.cartTotalPrice;
         Assert.assertEquals(totalOrderPrice,delFeeAndcartTotalPriceSum);
+    System.out.println("Total Order Price Assertion Is True ");
 }
 
 }

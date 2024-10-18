@@ -81,7 +81,7 @@ public class HomePage {
             WebElement VideoGames = driver.findElement(videoGames);
             JavascriptExecutor executor = (JavascriptExecutor)driver;
             executor.executeScript("arguments[0].click();", VideoGames);
-//            driver.findElement(videoGames).click();
+
             return true;
         });
         return new VideoGamesPage(driver);

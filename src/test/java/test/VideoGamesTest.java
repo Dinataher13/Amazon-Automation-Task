@@ -28,7 +28,7 @@ public class VideoGamesTest {
                 .checkFreeShipping().scrollToNew().selectNewFilter()
                 .selectResultFromSortingList().addItemsToCart().goToCart()
                 .getItemPrice().assertTotalPrice().goToCheckout()
-                .openPaymentMethods().chooseCashOnDelivery()
+                .chooseCashOnDelivery()
                 .getDeliveryFee().getTotalOrderPrice().assertTotalOrderPrice();
     }
 
