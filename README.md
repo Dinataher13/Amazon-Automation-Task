@@ -33,4 +33,10 @@ To set up and run the project locally:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/Dinataher13/Foodics-Task.git
+   git clone https://github.com/Dinataher13/Amazon-Automation-Task/
+
+## Demo 
+
+https://github.com/user-attachments/assets/87ed6726-1d70-42fd-b892-e19fb548b672
+
+
